@@ -4,45 +4,47 @@ import { movieInfo } from "./movie-info.js";
 export async function renderMovies() {
   const allMovies = await getMovies();
   const categoryHeading = document.querySelector(".movies-h2");
-  const comedyCategory = document.querySelectorAll(".comedy-category");
-  const actionCategory = document.querySelectorAll(".action-category");
-  const dramaCategory = document.querySelectorAll(".drama-category");
-  const ul = document.querySelector(".movies-list");
+  //const comedyCategory = document.querySelectorAll(".comedy-category");
+  //const actionCategory = document.querySelectorAll(".action-category");
+  //const dramaCategory = document.querySelectorAll(".drama-category");
+  const ul = document.querySelector(".list-styling");
 
   for (let i = 0; i < allMovies.length; i++) {
     categoryHeading.innerHTML = "Alla filmer";
     const li = document.createElement("li");
-    const category = allMovies[i].category;
-    const textOnImage = document.createElement("p");
-    li.classList.add("movies-list-item");
-    li.classList.add(category);
-    li.innerHTML += `<img src= "${allMovies[i].image[0]}" alt="movie image" id="${allMovies[i].id}" />`;
-    textOnImage.innerHTML = `<span>${category}</span>`;
+    //const category = allMovies[i].category;
+    //const textOnImage = document.createElement("p");
+    //li.classList.add("movies-list-item");
+    
+    
+    li.innerHTML += `<img src= "${allMovies[i].attributes.image.url}" alt="movie image" id="${allMovies[i].id}" />`;
+    //textOnImage.innerHTML = `<span>${category}</span>`;
+    //li.classList.add("movies-category-element");
     ul.appendChild(li);
-    li.appendChild(textOnImage);
+    //li.appendChild(textOnImage);
     movieInfo();
   }
 
-  comedyCategory.forEach((link) => {
+/* comedyCategory.forEach((link) => {
     link.addEventListener("click", (event) => {
       event.preventDefault();
 
       ul.innerHTML = "";
       for (let i = 0; i < allMovies.length; i++) {
-        if (allMovies[i].category == "Komedi") {
-          categoryHeading.innerHTML = "Komedi";
+       // if (allMovies[i].category == "Komedi") {
+          categoryHeading.innerHTML = "Alla Filmer";
 
           const li = document.createElement("li");
-          const category = allMovies[i].category;
-          const textOnImage = document.createElement("p");
+          //const category = allMovies[i].category;
+          //const textOnImage = document.createElement("p");
           li.classList.add("movies-list-item");
-          li.classList.add(category);
-          li.innerHTML += `<img src= "${allMovies[i].image[0]}" alt="movie image" id="${allMovies[i].id}" />`;
-          textOnImage.innerHTML = `<span>${category}</span>`;
+          //li.classList.add(category);
+          li.innerHTML += `<img src= "${allMovies[i].attributes.image.url}" alt="movie image" id="${allMovies[i].id}" />`;
+          //textOnImage.innerHTML = `<span>${category}</span>`;
           ul.appendChild(li);
-          li.appendChild(textOnImage);
+          //li.appendChild(textOnImage);
           movieInfo();
-        }
+        //}
       }
     });
   });
@@ -93,6 +95,6 @@ export async function renderMovies() {
         }
       }
     });
-  });
+  });*/
 }
 renderMovies();
