@@ -1,12 +1,14 @@
-export async function movieInfo() {
-  const movieOption = document.querySelectorAll(".movies-list-item");
-  const description = document.querySelector(".description");
+export function movieInfo() {
+  const movieOption = document.querySelectorAll(".list-styling li img");
+  //const description = document.querySelector(".description");
+  //const movieImg = document.querySelectorAll(".movies-list-item img");
 
   for (let i = 0; i < movieOption.length; i++) {
-    movieOption[i].addEventListener("click", openMovieInfo, false);
-  }
-  function openMovieInfo(e) {
-    e.preventDefault();
-    window.open("under-construction.html");
+  
+    movieOption[i].addEventListener("click", () => {
+      let movieId = movieOption[i].id;
+    console.log(movieId);
+      window.open(location.href + `/${movieId}`, "_self");
+  });
   }
 }

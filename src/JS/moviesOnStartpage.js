@@ -17,7 +17,7 @@ if (
           let movieItem = document.createElement("li");
           let movieImg = document.createElement("img");
           movieImg.src = item.attributes.image.url;
-          movieImg.alt = `Movie poster for a mocie ${item.attributes.title}`;
+          movieImg.alt = `Movie poster for a movie ${item.attributes.title}`;
           movieImg.id = item.id;
           document.querySelector(".comedy-start-list").appendChild(movieItem);
           movieItem.appendChild(movieImg);
