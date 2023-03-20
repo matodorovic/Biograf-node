@@ -1,10 +1,12 @@
     <main class="sec">
       <section class="sec-cont">
         <h1 class="description">{{ movie.attributes.title }}</h1>
-         <div class="movie-intro"> {{{ markdown movie.attributes.intro }}} </div>
+        <div class="movie-box">
         {{#if movie.attributes.image }}
         <img class="movie-img" alt="{{ movie.attributes.title }}" src="{{ movie.attributes.image.url }}">
         {{/if }}
+        <div class="movie-intro"> {{{ markdown movie.attributes.intro }}} </div>
+        </div>
       </section>
     </main>
 

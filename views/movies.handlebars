@@ -7,8 +7,8 @@
         <ul class="list-styling">
             {{#each movies }}
                 <li>
-                    <a href="/movies/{{ this.id }}" >
-                        <img src={{ this.attributes.image.url }} aria-label="{{ this.attributes.title }}"/>
+                    <a href='/movies/{{ this.id }}' >
+                        <img src={{ this.attributes.image.url }} aria-label={{ this.attributes.title }}/>
                     </a>
                 </li>
             {{/each}}

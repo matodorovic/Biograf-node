@@ -1,0 +1,47 @@
+.description {
+    color: $second-color;
+    margin: 2rem;
+    text-align: center;
+    font-size: 2.5rem;
+}
+
+.movie-box {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    margin: 2rem;
+}
+
+.movie-intro {
+    color: $first-color;
+    background-color: rgba($second-color, 0.7);
+    box-sizing: border-box;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    text-align: left;
+    height: fit-content;
+}
+
+.movie-img {
+    border: 1px solid $second-color;
+    border-radius: 0.4rem;
+    max-width: 40vw;
+    max-height: 600px;
+    height: fit-content;
+    margin: 0 2rem 0 2rem;
+  }
+
+  @media screen and (max-width: $breaking-point) {
+    .movie-box {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+    }
+
+    .movie-img {
+        margin-bottom: 2rem;
+        max-width: 70vw;
+    }
+    
+  }

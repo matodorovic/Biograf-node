@@ -17,11 +17,7 @@ app.engine('handlebars', engine({
   })
 );
 
-app.use("./static", express.static(resolve('static')));
-//app.use("/static", express.static("./static"));
-//app.use(express.static(resolve('../static')));
-app.use('./src', express.static(resolve('src')));
-//app.use('/', express.static(resolve('./static')));
+
 
 app.get("/", async (req, res) => {
     const movies = await getMovies();
@@ -37,7 +33,6 @@ app.get('/movies', async (req, res) => {
 
 app.get('/movies/:movieId', async (req, res) => {
     const movie = await getMovie(req.params.movieId);
-    
     if (movie) {
         res.render("movie-info", { movie });
         res.status(200);
@@ -88,11 +83,12 @@ app.get('/booking', (req, res) => {
 })
 
 
-
-
-
-
+app.use('/static', express.static(resolve('static')));
+app.use('/movies/static', express.static(resolve('static')));
+app.use('/src', express.static(resolve('src')));
+app.use('/movies/src', express.static(resolve('src')));
 app.use(express.json());
+
 
 app.use('*', (req, res) => {
     res.render('404');
@@ -102,3 +98,5 @@ app.use('*', (req, res) => {
 app.listen('5080', (req, res) => {
     console.log('Server is listening on port 5080');
 })
+
+export default app;
