@@ -1,77 +1,103 @@
 import express from 'express';
-import path from 'path';
-import Twig from 'twig';
+import path, { resolve } from 'path';
+import { engine } from "express-handlebars";
+import { marked } from "marked";
+import { getMovies, getMovie } from "./src/JS/getMovies.js";
 
 
 const app = express();
 
-app.set('views', '/views');
-app.set('view engine', 'twig');
-app.engine('Twig', Twig.renderFile);
+app.set("view engine", "handlebars");
+app.set("views", "./views");
+app.engine('handlebars', engine({
+    defaultLayout: 'index',
+    helpers: {
+        markdown: (md) => marked(md),
+    }, 
+  })
+);
 
-app.get('/', (req, res) => {
-    res.sendFile(path.resolve('index.html'));
+app.use("./static", express.static(resolve('static')));
+//app.use("/static", express.static("./static"));
+//app.use(express.static(resolve('../static')));
+app.use('./src', express.static(resolve('src')));
+//app.use('/', express.static(resolve('./static')));
+
+app.get("/", async (req, res) => {
+    const movies = await getMovies();
+    res.render("main", { movies });
+    res.status(200);
+});
+
+app.get('/movies', async (req, res) => {
+    const movies = await getMovies();
+    res.render("movies", { movies });
     res.status(200);
 })
 
-app.get('/movies', (req, res) => {
-    res.sendFile(path.resolve('movies.html'));
-    res.status(200);
-})
-
-app.get('/movies/:id', (req, res) => {
-    res.sendFile(path.resolve('movie-info.html'));
-    res.status(200);
+app.get('/movies/:movieId', async (req, res) => {
+    const movie = await getMovie(req.params.movieId);
+    
+    if (movie) {
+        res.render("movie-info", { movie });
+        res.status(200);
+      } else {
+        res.render("404");
+        res.status(404);
+      }
 })
 
 app.get('/about-us', (req, res) => {
-    res.sendFile(path.resolve('about-us.html'));
+    res.render('about-us');
     res.status(200);
 })
 
 app.get('/events', (req, res) => {
-    res.sendFile(path.resolve('events.html'));
+    res.render('events');
     res.status(200);
 })
 
 app.get('/salons', (req, res) => {
-    res.sendFile(path.resolve('salons.html'));
+    res.render('salons');
     res.status(200);
 })
 
 app.get('/restaurant', (req, res) => {
-    res.sendFile(path.resolve('restaurant.html'));
+    res.render('restaurant');
     res.status(200);
 })
 
 app.get('/salonA', (req, res) => {
-    res.sendFile(path.resolve('salonA.html'));
+    res.render('salonA');
     res.status(200);
 })
 
 app.get('/salonB', (req, res) => {
-    res.sendFile(path.resolve('salonB.html'));
+    res.render('salonB');
     res.status(200);
 })
 
 app.get('/under-construction', (req, res) => {
-    res.sendFile(path.resolve('under-construction.html'));
+    res.render('under-construction');
     res.status(200);
 })
 
 app.get('/booking', (req, res) => {
-    res.sendFile(path.resolve('booking.html'));
+    res.render('booking');
     res.status(200);
 })
 
-app.use("/static", express.static("./static"));
-app.use("/src", express.static("./src"));
 
-app.use('/*', (req, res) => {
-    res.sendFile(path.resolve('404.html'));
+
+
+
+
+app.use(express.json());
+
+app.use('*', (req, res) => {
+    res.render('404');
     res.status(404);
 })
-
 
 app.listen('5080', (req, res) => {
     console.log('Server is listening on port 5080');
