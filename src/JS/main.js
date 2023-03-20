@@ -6,8 +6,8 @@ import  moviesOnStartpage  from "./moviesOnStartpage.js";
 import { movieInfo } from "./movie-info.js";
 
 mobileMenu();
-moviesOnStartpage();
+//moviesOnStartpage();
 //sidebar();
 checkLocationForStyle();
 listenerMenuBtn();
-movieInfo();
+//movieInfo();
